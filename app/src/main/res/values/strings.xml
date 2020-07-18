@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">SimpleWeather</string>
+    <string name="tab_text_today">Today</string>
+    <string name="tab_text_tomorrow">Tomorrow</string>
+    <string name="tab_text_ten_days">10 Days</string>
+
+    <!-- Today's Labels and Placeholder Strings -->
+
+    <!-- Today's Primary Strings -->
+
+    <string name="date">June 20th, 2020</string>
+    <string name="current_temperature">50\u2103</string>
+    <string name="high_temperature">Hi 100\u2109</string>
+    <string name="low_temperature">Lo 0</string>
+    <string name="precipitation">Precipitation 20%</string>
+    <string name="current_forecast">Partly Cloudy</string>
+
+    <!-- Today's Sun Strings -->
+
+    <string name="dawn_title">Dawn</string>
+    <string name="sunrise_title">Sunrise</string>
+    <string name="solar_noon_title">Noon</string>
+    <string name="dusk_title">Dusk</string>
+    <string name="sunset_title">Sunset</string>
+    <string name="dawn_time">6:00 AM</string>
+    <string name="sunrise_time">7:00 PM</string>
+    <string name="solar_noon_time">12:00 PM</string>
+    <string name="dusk_time">9:00 PM</string>
+    <string name="sunset_time">7:00 PM</string>
+    <string name="current_time">9:38 AM</string>
+
+    <!-- Today's Current Strings -->
+
+    <string name="current_details_label">Current Details</string>
+    <string name="humidity_label">Humidity</string>
+    <string name="dew_point_label">Dew Point</string>
+    <string name="pressure_label">Pressure</string>
+    <string name="cloud_coverage_label">Cloud Coverage</string>
+    <string name="uv_label">UV Index</string>
+
+    <string name="visibility_label">Visibility</string>
+    <string name="ozone_label">Ozone</string>
+
+    <!-- Hourly Forecast Strings -->
+    <string name="hourly_forecast_label">Hourly Forecast</string>
+    <string name="hourly_icon">This icon shows the current condition</string>
+
+    <!-- Today's Wind Placeholder Strings -->
+
+    <!-- Today's Temperature Placeholder Strings -->
+
+
+    <!-- Tomorrows Placeholder Strings -->
+
+
+    <string name="sunrise_sunset_label">Sunrise and Sunset</string>
+
+    <!-- -->
+
+    <!-- Dark Sky Base Url -->
+
+    <string name="please_wait">Please Wait&#8230;</string>
+    <string name="date_place_holder">July 1, 2020</string>
+    <string name="action_refresh">Refresh</string>
+
+
+</resources>

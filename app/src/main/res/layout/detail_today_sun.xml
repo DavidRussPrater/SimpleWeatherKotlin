@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/sun_details"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:background="@color/colorWhiteBackground">
+
+    <TextView
+        android:id="@+id/sun_details_label"
+        style="@style/DetailHeader"
+        android:text="@string/sunrise_sunset_label"
+        app:layout_constraintLeft_toLeftOf="@id/sun_details"
+        app:layout_constraintLeft_toRightOf="@id/sun_details"
+        app:layout_constraintTop_toTopOf="@id/sun_details" />
+
+    <TextView
+        android:id="@+id/dawn_title"
+        style="@style/SunDetailLabel"
+        android:text="@string/dawn_title"
+        app:layout_constraintTop_toBottomOf="@id/sun_details_label"
+        app:layout_constraintBottom_toTopOf="@+id/dawn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/sunrise_title" />
+
+    <TextView
+        android:id="@+id/sunrise_title"
+        style="@style/SunDetailLabel"
+        android:text="@string/sunrise_title"
+        app:layout_constraintTop_toBottomOf="@id/sun_details_label"
+        app:layout_constraintBottom_toTopOf="@+id/sunrise"
+        app:layout_constraintLeft_toRightOf="@+id/dawn_title"
+        app:layout_constraintRight_toLeftOf="@id/solar_noon_title" />
+
+    <TextView
+        android:id="@+id/solar_noon_title"
+        style="@style/SunDetailLabel"
+        android:text="@string/solar_noon_title"
+        app:layout_constraintTop_toBottomOf="@id/sun_details_label"
+        app:layout_constraintBottom_toTopOf="@+id/solar_noon"
+        app:layout_constraintLeft_toRightOf="@id/sunrise_title"
+        app:layout_constraintRight_toLeftOf="@+id/dusk_title" />
+
+    <TextView
+        android:id="@+id/sunset_title"
+        style="@style/SunDetailLabel"
+        android:text="@string/dusk_title"
+        app:layout_constraintTop_toBottomOf="@id/sun_details_label"
+        app:layout_constraintBottom_toTopOf="@+id/sunset"
+        app:layout_constraintLeft_toRightOf="@id/dusk_title"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/dusk_title"
+        style="@style/SunDetailLabel"
+        android:text="@string/sunset_title"
+        app:layout_constraintTop_toBottomOf="@id/sun_details_label"
+        app:layout_constraintBottom_toTopOf="@+id/dusk"
+        app:layout_constraintLeft_toRightOf="@id/solar_noon_title"
+        app:layout_constraintRight_toLeftOf="@id/sunset_title" />
+
+    <TextView
+        android:id="@+id/dawn"
+        style="@style/SunDetailMeasurement"
+        android:text="@string/dawn_time"
+        app:layout_constraintTop_toBottomOf="@id/dawn_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/sunrise" />
+
+    <TextView
+        android:id="@+id/sunrise"
+        style="@style/SunDetailMeasurement"
+        android:text="@string/sunrise_time"
+        app:layout_constraintTop_toBottomOf="@id/sunset_title"
+        app:layout_constraintLeft_toRightOf="@+id/dawn"
+        app:layout_constraintRight_toLeftOf="@id/solar_noon" />
+
+    <TextView
+        android:id="@+id/solar_noon"
+        style="@style/SunDetailMeasurement"
+        android:text="@string/solar_noon_time"
+        app:layout_constraintTop_toBottomOf="@id/solar_noon_title"
+        app:layout_constraintLeft_toRightOf="@id/sunrise"
+        app:layout_constraintRight_toLeftOf="@id/sunset" />
+
+    <TextView
+        android:id="@+id/sunset"
+        style="@style/SunDetailMeasurement"
+        android:text="@string/sunset_time"
+        app:layout_constraintTop_toBottomOf="@id/sunset_title"
+        app:layout_constraintLeft_toRightOf="@id/solar_noon"
+        app:layout_constraintRight_toLeftOf="@id/dusk" />
+
+    <TextView
+        android:id="@+id/dusk"
+        style="@style/SunDetailMeasurement"
+        android:text="@string/dusk_time"
+        app:layout_constraintTop_toBottomOf="@id/dusk_title"
+        app:layout_constraintLeft_toRightOf="@id/sunset"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

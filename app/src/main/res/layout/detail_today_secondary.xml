@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/extra_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhiteBackground"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/current_weather_details"
+            style="@style/DetailHeader"
+            android:text="@string/current_details_label"
+            app:layout_constraintLeft_toLeftOf="@id/extra_details"
+            app:layout_constraintRight_toRightOf="@id/extra_details"
+            app:layout_constraintTop_toTopOf="@id/extra_details" />
+
+        <!-- This guideline divides the layout into a left and right half and is used for alignment -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontal_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <!-- Humidity label -->
+        <TextView
+            android:id="@+id/humidity_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/humidity_label"
+            app:layout_constraintLeft_toLeftOf="@id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/current_weather_details" />
+
+        <!-- Humidity measurement -->
+        <TextView
+            android:id="@+id/humidity"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@+id/current_weather_details"
+            tools:text="38%" />
+
+        <!-- Dew label -->
+        <TextView
+            android:id="@+id/dew_point_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/dew_point_label"
+            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/humidity_label" />
+
+        <!-- Dew measurement -->
+        <TextView
+            android:id="@+id/dew_point"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/humidity"
+            tools:text="56" />
+
+        <!-- Pressure label -->
+        <TextView
+            android:id="@+id/pressure_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/pressure_label"
+            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/dew_point_label" />
+
+        <!-- Pressure measurement -->
+        <TextView
+            android:id="@+id/pressure"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/dew_point"
+            tools:text="1009.92" />
+
+        <!-- Cloud Coverage label -->
+        <TextView
+            android:id="@+id/cloud_cover_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/cloud_coverage_label"
+            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/pressure_label" />
+
+        <!-- Cloud Coverage measurement -->
+        <TextView
+            android:id="@+id/cloud_cover"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/pressure"
+            tools:text="20" />
+
+        <!-- UV label -->
+        <TextView
+            android:id="@+id/uv_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/uv_label"
+            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/cloud_cover_label" />
+
+        <!-- UV measurement -->
+        <TextView
+            android:id="@+id/uv"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/cloud_cover"
+            tools:text="20" />
+
+        <!-- Visibility label -->
+        <TextView
+            android:id="@+id/visibility_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/visibility_label"
+            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/uv_label" />
+
+        <!-- Visibility measurement -->
+        <TextView
+            android:id="@+id/visibility"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/uv"
+            tools:text="10" />
+
+        <!-- Ozone label -->
+        <TextView
+            android:id="@+id/ozone_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/ozone_label"
+            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
+            app:layout_constraintTop_toBottomOf="@id/visibility_label" />
+
+        <!-- Ozone measurement -->
+        <TextView
+            android:id="@+id/ozone"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/visibility"
+            tools:text="310.54" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
+

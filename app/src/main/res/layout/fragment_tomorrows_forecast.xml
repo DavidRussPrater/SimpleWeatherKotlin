@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.TomorrowsForecast"
+        android:background="@drawable/background_gradient_day"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/detail_tomorrow_primary"
+                layout="@layout/detail_tomorrow_primary"/>
+
+            <include
+                android:id="@+id/tomorrows_hourly_forecast"
+                layout="@layout/detail_tomorrow_hourly"/>
+
+            <include
+                android:id="@+id/detail_tomorrow_secondary"
+                layout="@layout/detail_tomorrow_secondary"/>
+
+            <include
+                android:id="@+id/detail_tomorrow_sun"
+                layout="@layout/detail_tomorrow_sun"/>
+
+        </LinearLayout>
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tomorrows_sun_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/colorWhiteBackground">
+
+        <TextView
+            android:id="@+id/tomorrows_sun_details_label"
+            style="@style/DetailHeader"
+            android:text="@string/sunrise_sunset_label"
+            app:layout_constraintLeft_toLeftOf="@id/tomorrows_sun_details"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_sun_details"
+            app:layout_constraintTop_toTopOf="@id/tomorrows_sun_details" />
+
+        <TextView
+            android:id="@+id/tomorrows_dawn_title"
+            style="@style/SunDetailLabel"
+            android:text="@string/dawn_title"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sun_details_label"
+            app:layout_constraintBottom_toTopOf="@+id/tomorrows_dawn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_sunrise_title" />
+
+        <TextView
+            android:id="@+id/tomorrows_sunrise_title"
+            style="@style/SunDetailLabel"
+            android:text="@string/sunrise_title"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sun_details_label"
+            app:layout_constraintBottom_toTopOf="@+id/tomorrows_sunrise"
+            app:layout_constraintLeft_toRightOf="@+id/tomorrows_dawn_title"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_solar_noon_title" />
+
+        <TextView
+            android:id="@+id/tomorrows_solar_noon_title"
+            style="@style/SunDetailLabel"
+            android:text="@string/solar_noon_title"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sun_details_label"
+            app:layout_constraintBottom_toTopOf="@+id/tomorrows_solar_noon"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_sunrise_title"
+            app:layout_constraintRight_toLeftOf="@+id/tomorrows_dusk_title" />
+
+        <TextView
+            android:id="@+id/tomorrows_sunset_title"
+            style="@style/SunDetailLabel"
+            android:text="@string/dusk_title"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sun_details_label"
+            app:layout_constraintBottom_toTopOf="@+id/tomorrows_sunset"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_dusk_title"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tomorrows_dusk_title"
+            style="@style/SunDetailLabel"
+            android:text="@string/sunset_title"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sun_details_label"
+            app:layout_constraintBottom_toTopOf="@+id/tomorrows_dusk"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_solar_noon_title"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_sunset_title" />
+
+        <TextView
+            android:id="@+id/tomorrows_dawn"
+            style="@style/SunDetailMeasurement"
+            android:text="@string/dawn_time"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_dawn_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_sunrise" />
+
+        <TextView
+            android:id="@+id/tomorrows_sunrise"
+            style="@style/SunDetailMeasurement"
+            android:text="@string/sunrise_time"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sunset_title"
+            app:layout_constraintLeft_toRightOf="@+id/tomorrows_dawn"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_solar_noon" />
+
+        <TextView
+            android:id="@+id/tomorrows_solar_noon"
+            style="@style/SunDetailMeasurement"
+            android:text="@string/solar_noon_time"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_solar_noon_title"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_sunrise"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_sunset" />
+
+        <TextView
+            android:id="@+id/tomorrows_sunset"
+            style="@style/SunDetailMeasurement"
+            android:text="@string/sunset_time"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_sunset_title"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_solar_noon"
+            app:layout_constraintRight_toLeftOf="@id/tomorrows_dusk" />
+
+        <TextView
+            android:id="@+id/tomorrows_dusk"
+            style="@style/SunDetailMeasurement"
+            android:text="@string/dusk_time"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_dusk_title"
+            app:layout_constraintLeft_toRightOf="@id/tomorrows_sunset"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

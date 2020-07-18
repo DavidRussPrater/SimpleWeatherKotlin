@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tomorrows_extra_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhiteBackground"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/tomorrows_current_weather_details"
+            style="@style/DetailHeader"
+            android:text="@string/current_details_label"
+            app:layout_constraintLeft_toLeftOf="@id/tomorrows_extra_details"
+            app:layout_constraintRight_toRightOf="@id/tomorrows_extra_details"
+            app:layout_constraintTop_toTopOf="@id/tomorrows_extra_details" />
+
+        <!-- This guideline divides the layout into a left and right half and is used for alignment -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tomorrows_horizontal_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <!-- Humidity label -->
+        <TextView
+            android:id="@+id/tomorrows_humidity_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/humidity_label"
+            app:layout_constraintLeft_toLeftOf="@id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_current_weather_details" />
+
+        <!-- Humidity measurement -->
+        <TextView
+            android:id="@+id/tomorrows_humidity"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@+id/tomorrows_current_weather_details"
+            tools:text="38%" />
+
+        <!-- Dew label -->
+        <TextView
+            android:id="@+id/tomorrows_dew_point_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/dew_point_label"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_humidity_label" />
+
+        <!-- Dew measurement -->
+        <TextView
+            android:id="@+id/tomorrows_dew_point"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_humidity"
+            tools:text="56" />
+
+        <!-- Pressure label -->
+        <TextView
+            android:id="@+id/tomorrows_pressure_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/pressure_label"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_dew_point_label" />
+
+        <!-- Pressure measurement -->
+        <TextView
+            android:id="@+id/tomorrows_pressure"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_dew_point"
+            tools:text="1009.92" />
+
+        <!-- Cloud Coverage label -->
+        <TextView
+            android:id="@+id/tomorrows_cloud_cover_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/cloud_coverage_label"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_pressure_label" />
+
+        <!-- Cloud Coverage measurement -->
+        <TextView
+            android:id="@+id/tomorrows_cloud_cover"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_pressure"
+            tools:text="20" />
+
+        <!-- UV label -->
+        <TextView
+            android:id="@+id/tomorrows_uv_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/uv_label"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_cloud_cover_label" />
+
+        <!-- UV measurement -->
+        <TextView
+            android:id="@+id/tomorrows_uv"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_cloud_cover"
+            tools:text="20" />
+
+        <!-- Visibility label -->
+        <TextView
+            android:id="@+id/tomorrows_visibility_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/visibility_label"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_uv_label" />
+
+        <!-- Visibility measurement -->
+        <TextView
+            android:id="@+id/tomorrows_visibility"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_uv"
+            tools:text="10" />
+
+        <!-- Ozone label -->
+        <TextView
+            android:id="@+id/tomorrows_ozone_label"
+            style="@style/SecondaryDetailLabel"
+            android:text="@string/ozone_label"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_visibility_label" />
+
+        <!-- Ozone measurement -->
+        <TextView
+            android:id="@+id/tomorrows_ozone"
+            style="@style/SecondaryDetailMeasurement"
+            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@id/tomorrows_visibility"
+            tools:text="310.54" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
+

@@ -1,0 +1,67 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hourly_time"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                tools:text="7 AM" />
+
+            <ImageView
+                android:id="@+id/hourly_condition_icon"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:contentDescription="@string/hourly_icon"
+                android:gravity="center"
+                app:srcCompat="@drawable/icons8_sun_96px_2" />
+
+            <TextView
+                android:id="@+id/hourly_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                tools:text="67\u2109" />
+
+            <TextView
+                android:id="@+id/hourly_wind"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                tools:text="12 mph" />
+
+            <ImageView
+                android:id="@+id/hourly_wind_icon"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:contentDescription="@string/hourly_icon"
+                android:gravity="center"
+                app:srcCompat="@drawable/ic_arrow_up_right" />
+
+            <TextView
+                android:id="@+id/hourly_wind_direction"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                tools:text="NW" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</layout>
