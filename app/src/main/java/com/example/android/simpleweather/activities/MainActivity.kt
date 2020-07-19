@@ -21,6 +21,7 @@ import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.android.simpleweather.utils.Constants
 import com.example.android.simpleweather.R
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.topAppBar))
+        val swipeRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_layout)
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById<ViewPager>(R.id.view_pager).apply {
             offscreenPageLimit = 2
@@ -111,6 +113,13 @@ class MainActivity : AppCompatActivity() {
                 .check()
 
         }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.i("Swiped", "User Swiped")
+            requestLocationData()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
     }
 
     /**
@@ -149,7 +158,7 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }.show()
     }
-    // END
+
 
 
     /**
@@ -166,7 +175,6 @@ class MainActivity : AppCompatActivity() {
             Looper.myLooper()
         )
     }
-    // END
 
 
     /**
@@ -304,7 +312,6 @@ class MainActivity : AppCompatActivity() {
         }
         return value
     }
-
 
 
 }
