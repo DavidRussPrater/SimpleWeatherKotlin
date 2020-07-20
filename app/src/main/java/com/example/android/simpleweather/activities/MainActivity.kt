@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
@@ -17,13 +18,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
-import com.example.android.simpleweather.utils.Constants
 import com.example.android.simpleweather.R
 import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.network.WeatherService
@@ -31,6 +31,7 @@ import com.example.android.simpleweather.ui.main.SectionsPagerAdapter
 import com.example.android.simpleweather.ui.main.SevenDayForecastFragment
 import com.example.android.simpleweather.ui.main.TodaysForecastFragment
 import com.example.android.simpleweather.ui.main.TomorrowsForecastFragment
+import com.example.android.simpleweather.utils.Constants
 import com.google.android.gms.location.*
 import com.google.android.material.tabs.TabLayout
 import com.karumi.dexter.Dexter
@@ -38,10 +39,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import kotlinx.android.synthetic.main.detail_today_primary.*
 import retrofit.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 // OpenWeather Link : https://openweathermap.org/api
@@ -66,6 +64,11 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
+
+
+        val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val unitPreference: Boolean? = sharedPref.getBoolean("units_switch", false)
+        Log.i("Preference", unitPreference.toString())
 
         // Initialize the Fused location variable
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -183,17 +186,28 @@ class MainActivity : AppCompatActivity() {
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val mLastLocation: Location = locationResult.lastLocation
+
             val latitude = mLastLocation.latitude
             Log.i("Current Latitude", "$latitude")
 
             val longitude = mLastLocation.longitude
             Log.i("Current Longitude", "$longitude")
-            getLocationWeatherDetails(latitude, longitude)
+            getLocationWeatherDetails(latitude, longitude, context = this@MainActivity)
         }
     }
 
 
-    private fun getLocationWeatherDetails(latitude: Double, longitude: Double){
+    private fun getLocationWeatherDetails(latitude: Double, longitude: Double, context: Context){
+        val unitConstant: String
+        val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val unitPreference: Boolean = sharedPref.getBoolean("units_switch", false)
+
+        if (unitPreference) {
+            unitConstant = Constants.METRIC_UNIT
+        } else {
+            unitConstant = Constants.IMPERIAL_UNIT
+        }
+
         if(Constants.isNetworkAvailable(this)) {
 
             val retrofit : Retrofit = Retrofit.Builder().
@@ -206,7 +220,7 @@ class MainActivity : AppCompatActivity() {
 
             val listCall: Call<WeatherResponse> = service.getWeather(
                 latitude, longitude,
-                Constants.IMPERIAL_UNIT,
+                unitConstant,
                 Constants.EXCLUDE_MINUTELY,
                 Constants.APP_ID
             )
@@ -281,8 +295,20 @@ class MainActivity : AppCompatActivity() {
                 requestLocationData()
                 true
             }
+            R.id.action_settings ->  {
+                val settingsIntent = Intent(
+                    this,
+                    SettingsActivity::class.java
+                )
+                startActivity(settingsIntent)
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    fun getUnitPreference(unitPreference: Boolean): Boolean{
+        return true
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -304,14 +330,5 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    fun getUnit(value: String): String {
-        var value = "°C"
-        if ("US" == value || "LR" == value || "MM" == value){
-            value = "°F"
-        }
-        return value
-    }
-
 
 }

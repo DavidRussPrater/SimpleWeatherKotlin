@@ -15,6 +15,7 @@ import com.example.android.simpleweather.utils.WeatherIconType
 import org.jetbrains.annotations.NotNull
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 
 class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): RecyclerView.Adapter<TodayHourlyAdapter.ViewHolder>()  {
@@ -36,7 +37,8 @@ class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): Recycler
 
         fun render(hourly: Hourly) {
             mBinding.hourlyTime.text = unixTime(hourly.dt).toString()
-            mBinding.hourlyTemperature.text = hourly.temp.toString()
+            mBinding.hourlyTemperature.text = (hourly.temp?.roundToInt()
+                .toString() + "°")
             mBinding.hourlyWind.text = hourly.windSpeed.toString()
             Log.i("Wind Speed", hourly.windSpeed.toString())
             mBinding.hourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weather?.first()?.icon).iconID)

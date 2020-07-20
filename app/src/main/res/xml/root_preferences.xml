@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="units_switch"
+                android:summary="@string/unit_preference_summary"
+                android:title="@string/unit_preference_title" />
+
+</androidx.preference.PreferenceScreen>

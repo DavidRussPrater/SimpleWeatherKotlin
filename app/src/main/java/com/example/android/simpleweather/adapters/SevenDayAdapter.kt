@@ -9,6 +9,7 @@ import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.utils.WeatherIconType
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 class SevenDayAdapter(private val weatherResponse: WeatherResponse): RecyclerView.Adapter<SevenDayAdapter.ViewHolder>()  {
 
@@ -31,8 +32,10 @@ class SevenDayAdapter(private val weatherResponse: WeatherResponse): RecyclerVie
             mBinding.dailyDate.text = unixDate(daily.dt).toString()
             mBinding.dailyConditionDescription.text = daily.weather?.first()?.description.toString().capitalizeWords()
             mBinding.dailyConditionIcon.setImageResource(WeatherIconType.from(daily.weather?.first()?.icon).iconID)
-            mBinding.dailyTemperatureHigh.text = daily.temp?.max.toString()
-            mBinding.dailyTemperatureLow.text = daily.temp?.min.toString()
+            mBinding.dailyTemperatureHigh.text = (daily.temp?.max?.roundToInt()
+                .toString() + "°")
+            mBinding.dailyTemperatureLow.text = (daily.temp?.min?.roundToInt()
+                .toString() + "°")
 
         }
 

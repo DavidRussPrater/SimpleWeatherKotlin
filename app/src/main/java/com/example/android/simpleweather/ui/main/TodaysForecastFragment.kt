@@ -14,6 +14,7 @@ import com.example.android.simpleweather.utils.Conversions
 import com.example.android.simpleweather.utils.WeatherIconType
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 /**
  * A simple [Fragment] subclass.
@@ -38,8 +39,6 @@ class TodaysForecastFragment : Fragment() {
             mBinding = this
         }.root
 
-        //TODO (2) call setupUI on swipe refresh listener
-
     companion object {
 
         @JvmStatic
@@ -52,15 +51,18 @@ class TodaysForecastFragment : Fragment() {
     }
 
     fun render(weatherList: WeatherResponse){
-        mBinding.detailTodayPrimary.currentTemperature.text = weatherList.current?.temp.toString()
+        mBinding.detailTodayPrimary.currentTemperature.text = (weatherList.current?.temp?.roundToInt()
+            .toString() + "°")
         mBinding.detailTodayPrimary.conditionIcon.setImageResource(WeatherIconType.from(weatherList.current?.weather?.first()?.icon).iconID)
 
         mBinding.detailTodayPrimary.currentCondition.text = weatherList.current?.weather?.first()?.description?.capitalizeWords()
 
         mBinding.detailTodayPrimary.currentTime.text = unixTime(weatherList.current?.dt).toString()
         mBinding.detailTodayPrimary.date.text = unixDate(weatherList.current?.dt).toString()
-        mBinding.detailTodayPrimary.temperatureHigh.text = weatherList.daily?.first()?.temp?.max.toString()
-        mBinding.detailTodayPrimary.temperatureLow.text = weatherList.daily?.first()?.temp?.min.toString()
+        mBinding.detailTodayPrimary.temperatureHigh.text = (weatherList.daily?.first()?.temp?.max?.roundToInt()
+            .toString() + "°↑")
+        mBinding.detailTodayPrimary.temperatureLow.text = (weatherList.daily?.first()?.temp?.min?.roundToInt()
+            .toString() + "°↓")
 
         mBinding.detailTodaySecondary.humidity.text = (weatherList.current?.humidity.toString() + "%")
         mBinding.detailTodaySecondary.dewPoint.text = weatherList.current?.dewPoint.toString()

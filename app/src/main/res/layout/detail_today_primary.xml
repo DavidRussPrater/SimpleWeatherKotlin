@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/todays_primary_details"
@@ -89,7 +90,7 @@
             app:layout_constraintLeft_toRightOf="@+id/vertical_guideline"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icons8_sun_96px_2"
+            tools:srcCompat="@drawable/icons8_sun_96px_2"
             />
 
         <TextView

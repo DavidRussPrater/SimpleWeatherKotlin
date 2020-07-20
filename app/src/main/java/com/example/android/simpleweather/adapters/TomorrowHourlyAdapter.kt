@@ -9,6 +9,7 @@ import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.utils.WeatherIconType
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 class TomorrowHourlyAdapter(private val weatherResponse: WeatherResponse): RecyclerView.Adapter<TomorrowHourlyAdapter.ViewHolder>()  {
 
@@ -30,7 +31,8 @@ class TomorrowHourlyAdapter(private val weatherResponse: WeatherResponse): Recyc
 
         fun render(hourly: Hourly) {
             mBinding.tomorrowsHourlyTime.text = unixTime(hourly.dt).toString()
-            mBinding.tomorrowsHourlyTemperature.text = hourly.temp.toString()
+            mBinding.tomorrowsHourlyTemperature.text = (hourly.temp?.roundToInt()
+                .toString() + "°")
             mBinding.tomorrowsHourlyWind.text = hourly.windSpeed.toString()
             mBinding.tomorrowsHourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weather?.first()?.icon).iconID)
         }

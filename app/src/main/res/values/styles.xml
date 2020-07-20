@@ -8,6 +8,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
 
     </style>
 
@@ -24,19 +25,12 @@
     <style name="DetailHeader" parent="TextAppearance.AppCompat.Title">
 
         <item name="android:layout_width">match_parent</item>
-
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:paddingStart">4dp</item>
-
         <item name="android:paddingEnd">4dp</item>
-
         <item name="android:layout_margin">4dp</item>
-
         <item name="android:textSize">14sp</item>
-
         <item name="android:textColor">@color/extraTextColor</item>
-
         <item name="android:fontFamily">sans-serif</item>
 
     </style>
@@ -49,19 +43,12 @@
     <style name="SecondaryDetailLabel" parent="@style/TextAppearance.AppCompat.Title">
 
         <item name="android:layout_width">0dp</item>
-
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:fontFamily">sans-serif</item>
-
         <item name="android:paddingStart">16dp</item>
-
         <item name="android:paddingEnd">16dp</item>
-
         <item name="android:layout_margin">4dp</item>
-
         <item name="android:textSize">12sp</item>
-
         <item name="android:textColor">@color/colorSecondaryText</item>
 
     </style>
@@ -74,15 +61,10 @@
     <style name="SecondaryDetailMeasurement" parent="TextAppearance.AppCompat">
 
         <item name="android:layout_width">0dp</item>
-
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:layout_margin">4dp</item>
-
         <item name="android:textSize">12sp</item>
-
         <item name="android:fontFamily">sans-serif</item>
-
         <item name="android:textColor">@color/colorSecondaryText</item>
 
     </style>
@@ -95,17 +77,11 @@
     <style name="SunDetailLabel" parent="TextAppearance.AppCompat.Title">
 
         <item name="android:layout_width">0dp</item>
-
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:fontFamily">sans-serif</item>
-
         <item name="android:layout_margin">4dp</item>
-
         <item name="android:textSize">12sp</item>
-
         <item name="android:textColor">@color/colorSecondaryText</item>
-
         <item name="android:gravity">center</item>
 
     </style>
@@ -118,19 +94,15 @@
     <style name="SunDetailMeasurement" parent="TextAppearance.AppCompat">
 
         <item name="android:layout_width">0dp</item>
-
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:fontFamily">sans-serif</item>
-
         <item name="android:layout_margin">4dp</item>
-
         <item name="android:textSize">12sp</item>
-
         <item name="android:textColor">@color/colorSecondaryText</item>
-
         <item name="android:gravity">center</item>
 
     </style>
+
+
 
 </resources>

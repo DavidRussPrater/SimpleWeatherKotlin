@@ -12,6 +12,7 @@ import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.utils.WeatherIconType
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 
 /**
@@ -50,8 +51,10 @@ class TomorrowsForecastFragment : Fragment() {
     fun render(weatherList: WeatherResponse){
 
         mBinding.detailTomorrowPrimary.tomorrowsDate.text =  unixDate(weatherList.daily?.get(1)?.dt).toString()
-        mBinding.detailTomorrowPrimary.tomorrowsTemperatureHigh.text = weatherList.daily?.get(1)?.temp?.max.toString()
-        mBinding.detailTomorrowPrimary.tomorrowsTemperatureLow.text = weatherList.daily?.get(1)?.temp?.min.toString()
+        mBinding.detailTomorrowPrimary.tomorrowsTemperatureHigh.text = (weatherList.daily?.get(1)?.temp?.max?.roundToInt()
+            .toString() + "°")
+        mBinding.detailTomorrowPrimary.tomorrowsTemperatureLow.text = (weatherList.daily?.get(1)?.temp?.min?.roundToInt()
+            .toString() + "°")
         mBinding.detailTomorrowPrimary.tomorrowsCurrentCondition.text = weatherList.daily?.get(1)?.weather?.first()?.description?.capitalizeWords()
         mBinding.detailTomorrowPrimary.tomorrowsConditionIcon.setImageResource(WeatherIconType.from(weatherList.daily?.get(1)?.weather?.first()?.icon).iconID)
         mBinding.detailTomorrowPrimary.tomorrowsPrecipitation.text = weatherList.daily?.get(1)?.rain.toString()
