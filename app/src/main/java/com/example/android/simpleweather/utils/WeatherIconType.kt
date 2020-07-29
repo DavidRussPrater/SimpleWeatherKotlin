@@ -37,18 +37,18 @@ enum class WeatherIconType {
             "03d" -> SCATTER_CLOUDS
             "04d" -> BROKEN_CLOUDS
             "09d" -> SHOWER_RAIN
-            "010d" -> RAIN
-            "011d" -> THUNDERSTORM
-            "013d" -> SNOW
+            "10d" -> RAIN
+            "11d" -> THUNDERSTORM
+            "13d" -> SNOW
             "50d" -> MIST
             "01n" -> NIGHT_CLEAR_SKY
             "02n" -> NIGHT_FEW_CLOUDS
             "03n" -> NIGHT_SCATTER_CLOUDS
             "04n" -> NIGHT_BROKEN_CLOUDS
             "09n" -> NIGHT_SHOWER_RAIN
-            "010n" -> NIGHT_RAIN
-            "011n" -> NIGHT_THUNDERSTORM
-            "013n" -> NIGHT_SNOW
+            "10n" -> NIGHT_RAIN
+            "11n" -> NIGHT_THUNDERSTORM
+            "13n" -> NIGHT_SNOW
             "50n" -> NIGHT_MIST
             else -> DEFAULT
         }

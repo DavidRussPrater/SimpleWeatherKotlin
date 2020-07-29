@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">SimpleWeather</string>
+    <string name="app_name">Simple Weather</string>
     <string name="tab_text_today">Today</string>
     <string name="tab_text_tomorrow">Tomorrow</string>
-    <string name="tab_text_ten_days">10 Days</string>
+    <string name="tab_text_seven_days">Seven Day</string>
 
     <!-- Today's Labels and Placeholder Strings -->
 

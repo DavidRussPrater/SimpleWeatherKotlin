@@ -3,11 +3,7 @@ package com.example.android.simpleweather.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.simpleweather.R
-import com.example.android.simpleweather.databinding.DetailTodayHourlyBinding
 import com.example.android.simpleweather.databinding.ItemTodayHourlyBinding
 import com.example.android.simpleweather.models.Hourly
 import com.example.android.simpleweather.models.WeatherResponse
@@ -21,11 +17,13 @@ import kotlin.math.roundToInt
 class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): RecyclerView.Adapter<TodayHourlyAdapter.ViewHolder>()  {
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemTodayHourlyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun getItemCount() = weatherResponse.hourly?.count() ?: 0
+
 
     override fun onBindViewHolder(viewHolder: TodayHourlyAdapter.ViewHolder, position: Int) {
         weatherResponse.hourly?.get(position)?.let {
@@ -37,10 +35,10 @@ class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): Recycler
 
         fun render(hourly: Hourly) {
             mBinding.hourlyTime.text = unixTime(hourly.dt).toString()
+            Log.i("Time", unixTime(hourly.dt).toString())
             mBinding.hourlyTemperature.text = (hourly.temp?.roundToInt()
                 .toString() + "°")
             mBinding.hourlyWind.text = hourly.windSpeed.toString()
-            Log.i("Wind Speed", hourly.windSpeed.toString())
             mBinding.hourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weather?.first()?.icon).iconID)
         }
 

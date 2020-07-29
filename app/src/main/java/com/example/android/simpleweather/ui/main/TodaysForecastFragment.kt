@@ -1,7 +1,6 @@
 package com.example.android.simpleweather.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.simpleweather.adapters.TodayHourlyAdapter
 import com.example.android.simpleweather.databinding.FragmentTodaysForecastBinding
 import com.example.android.simpleweather.models.WeatherResponse
-import com.example.android.simpleweather.utils.Conversions
 import com.example.android.simpleweather.utils.WeatherIconType
 import java.text.SimpleDateFormat
 import java.util.*
@@ -69,7 +67,7 @@ class TodaysForecastFragment : Fragment() {
         mBinding.detailTodaySecondary.pressure.text = weatherList.current?.pressure.toString()
         mBinding.detailTodaySecondary.cloudCover.text = (weatherList.current?.clouds.toString() + "%")
         mBinding.detailTodaySecondary.uv.text = weatherList.current?.uvi.toString()
-        mBinding.detailTodaySecondary.visibility.text = visibiltyConverter(weatherList.current?.visibility).toString()
+        mBinding.detailTodaySecondary.visibility.text = visibilityConverter(weatherList.current?.visibility)
 
         mBinding.detailTodaySun.sunrise.text = unixTime(weatherList.daily?.first()?.sunrise).toString()
         mBinding.detailTodaySun.sunset.text = unixTime(weatherList.daily?.first()?.sunset).toString()
@@ -99,8 +97,8 @@ class TodaysForecastFragment : Fragment() {
     fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
 
 
-    private fun visibiltyConverter(visibility: Double?): Double? {
-        return (visibility?.times(0.000621371))
+    private fun visibilityConverter(visibility: Double?): String? {
+        return ("%.2f".format(visibility?.times(0.000621371)))
     }
 
 }

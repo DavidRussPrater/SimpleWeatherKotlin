@@ -45,7 +45,7 @@ class SevenDayAdapter(private val weatherResponse: WeatherResponse): RecyclerVie
 
     private fun unixDate(timex: Long?) : String? {
         val date = timex?.times(1000L)?.let { Date(it) }
-        val sdf = SimpleDateFormat("MMMM d, y", Locale.US)
+        val sdf = SimpleDateFormat("EEEE, MMMM d", Locale.US)
         sdf.timeZone = TimeZone.getDefault()
         return sdf.format(date)
     }

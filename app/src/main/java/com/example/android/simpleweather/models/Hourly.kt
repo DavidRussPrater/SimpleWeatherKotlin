@@ -26,9 +26,10 @@ data class Hourly(
 
     val visibility: Int?,
 
-    val weather: List<Weather?>?,
-
     val windDeg: Int?,
 
-    val windSpeed: Double?
+    val windSpeed: Double?,
+
+    val weather: List<Weather?>?
+
 ): Serializable

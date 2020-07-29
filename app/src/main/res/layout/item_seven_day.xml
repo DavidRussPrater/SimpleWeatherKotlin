@@ -29,7 +29,6 @@
                 android:id="@+id/daily_condition_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/hourly_icon"
                 android:gravity="center"
                 android:textColor="@color/secondary_text_color"
                 app:layout_constraintTop_toBottomOf="@id/daily_date"
@@ -41,13 +40,14 @@
             <ImageView
                 android:id="@+id/daily_condition_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/hourly_icon"
-                app:layout_constraintRight_toLeftOf="@id/daily_temperature_high"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:gravity="center"
-                app:srcCompat="@drawable/icons8_sun_96px_2" />
+                app:layout_constraintRight_toLeftOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/icons8_sun_96px_2" />
 
             <TextView
                 android:id="@+id/daily_temperature_high"
@@ -73,6 +73,13 @@
                 app:layout_constraintTop_toBottomOf="@id/daily_temperature_high"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="67\u2109" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="352dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

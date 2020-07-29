@@ -24,7 +24,7 @@ class Daily (
 
     val sunset: Long?,
 
-    val temp: Temperature?,
+    val temp: Temp?,
 
     val uvi: Double?,
 

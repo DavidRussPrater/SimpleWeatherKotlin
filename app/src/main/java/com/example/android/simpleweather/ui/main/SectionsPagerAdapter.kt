@@ -9,7 +9,7 @@ import com.example.android.simpleweather.R
 private val TAB_TITLES = arrayOf(
         R.string.tab_text_today,
         R.string.tab_text_tomorrow,
-        R.string.tab_text_ten_days
+        R.string.tab_text_seven_days
 )
 
 /**

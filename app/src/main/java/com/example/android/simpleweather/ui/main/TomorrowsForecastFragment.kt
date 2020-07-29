@@ -3,10 +3,7 @@ package com.example.android.simpleweather.ui.main
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.android.simpleweather.R
-import com.example.android.simpleweather.databinding.FragmentTodaysForecastBinding
 import com.example.android.simpleweather.databinding.FragmentTomorrowsForecastBinding
 import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.utils.WeatherIconType
@@ -51,20 +48,20 @@ class TomorrowsForecastFragment : Fragment() {
     fun render(weatherList: WeatherResponse){
 
         mBinding.detailTomorrowPrimary.tomorrowsDate.text =  unixDate(weatherList.daily?.get(1)?.dt).toString()
-        mBinding.detailTomorrowPrimary.tomorrowsTemperatureHigh.text = (weatherList.daily?.get(1)?.temp?.max?.roundToInt()
-            .toString() + "°")
+        mBinding.detailTomorrowPrimary.tomorrowsTemperatureHigh.text = ((weatherList.daily?.get(1)?.temp?.max?.roundToInt())
+            .toString() + "°↑")
         mBinding.detailTomorrowPrimary.tomorrowsTemperatureLow.text = (weatherList.daily?.get(1)?.temp?.min?.roundToInt()
-            .toString() + "°")
+            .toString() + "°↓")
         mBinding.detailTomorrowPrimary.tomorrowsCurrentCondition.text = weatherList.daily?.get(1)?.weather?.first()?.description?.capitalizeWords()
         mBinding.detailTomorrowPrimary.tomorrowsConditionIcon.setImageResource(WeatherIconType.from(weatherList.daily?.get(1)?.weather?.first()?.icon).iconID)
-        mBinding.detailTomorrowPrimary.tomorrowsPrecipitation.text = weatherList.daily?.get(1)?.rain.toString()
+        mBinding.detailTomorrowPrimary.tomorrowsPrecipitation.text = ("Precipitation " + weatherList.daily?.get(1)?.rain.toString() + "%")
 
         mBinding.detailTomorrowSecondary.tomorrowsHumidity.text = (weatherList.daily?.get(1)?.humidity.toString() + "%")
         mBinding.detailTomorrowSecondary.tomorrowsDewPoint.text = weatherList.daily?.get(1)?.dewPoint.toString()
         mBinding.detailTomorrowSecondary.tomorrowsPressure.text = weatherList.daily?.get(1)?.pressure.toString()
         mBinding.detailTomorrowSecondary.tomorrowsCloudCover.text = (weatherList.daily?.get(1)?.clouds.toString() + "%")
         mBinding.detailTomorrowSecondary.tomorrowsUv.text = weatherList.daily?.get(1)?.uvi.toString()
-        mBinding.detailTomorrowSecondary.tomorrowsVisibility.text = visibiltyConverter(weatherList.current?.visibility).toString()
+        mBinding.detailTomorrowSecondary.tomorrowsVisibility.text = visibilityConverter(weatherList.current?.visibility).toString()
 
         mBinding.detailTomorrowSun.tomorrowsSunrise.text = unixTime(weatherList.daily?.get(1)?.sunrise).toString()
         mBinding.detailTomorrowSun.tomorrowsSunset.text = unixTime(weatherList.daily?.get(1)?.sunset).toString()
@@ -104,8 +101,7 @@ class TomorrowsForecastFragment : Fragment() {
         return value
     }
 
-    private fun visibiltyConverter(visibility: Double?): Double? {
-        return (visibility?.times(0.000621371))
+    private fun visibilityConverter(visibility: Double?): String? {
+        return ("%.2f".format(visibility?.times(0.000621371)))
     }
-
 }

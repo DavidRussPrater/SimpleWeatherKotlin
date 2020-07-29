@@ -2,7 +2,7 @@ package com.example.android.simpleweather.models
 
 import java.io.Serializable
 
-data class Temperature(
+data class Temp(
     val day: Double?,
     val min: Double?,
     val max: Double?,

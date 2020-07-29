@@ -37,7 +37,7 @@ data class WeatherResponseMega(
         @SerializedName("sunset")
         val sunset: Int?,
         @SerializedName("temp")
-        val temp: Int?,
+        val temp: Double?,
         @SerializedName("uvi")
         val uvi: Double?,
         @SerializedName("visibility")
@@ -114,7 +114,7 @@ data class WeatherResponseMega(
             @SerializedName("min")
             val min: Double?,
             @SerializedName("morn")
-            val morn: Int?,
+            val morn: Double?,
             @SerializedName("night")
             val night: Double?
         )
@@ -143,13 +143,13 @@ data class WeatherResponseMega(
         @SerializedName("humidity")
         val humidity: Int?,
         @SerializedName("pop")
-        val pop: Int?,
+        val pop: Double?,
         @SerializedName("pressure")
         val pressure: Int?,
         @SerializedName("rain")
         val rain: Rain?,
         @SerializedName("temp")
-        val temp: Int?,
+        val temp: Double?,
         @SerializedName("visibility")
         val visibility: Int?,
         @SerializedName("weather")
