@@ -1,5 +1,6 @@
 package com.example.android.simpleweather.models
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class Daily (
@@ -30,7 +31,8 @@ class Daily (
 
     val weather: List<Weather?>?,
 
+    @SerializedName("wind_deg")
     val windDeg: Int?,
-
+    @SerializedName("wind_speed")
     val windSpeed: Double?
 ): Serializable

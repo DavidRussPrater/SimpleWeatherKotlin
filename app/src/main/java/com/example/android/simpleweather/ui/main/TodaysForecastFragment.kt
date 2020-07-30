@@ -63,13 +63,18 @@ class TodaysForecastFragment : Fragment() {
             .toString() + "°↓")
 
         mBinding.detailTodaySecondary.humidity.text = (weatherList.current?.humidity.toString() + "%")
-        mBinding.detailTodaySecondary.dewPoint.text = weatherList.current?.dewPoint.toString()
+        mBinding.detailTodaySecondary.dewPoint.text = weatherList.current?.dewPoint?.roundToInt().toString()
         mBinding.detailTodaySecondary.pressure.text = weatherList.current?.pressure.toString()
         mBinding.detailTodaySecondary.cloudCover.text = (weatherList.current?.clouds.toString() + "%")
         mBinding.detailTodaySecondary.uv.text = weatherList.current?.uvi.toString()
         mBinding.detailTodaySecondary.visibility.text = visibilityConverter(weatherList.current?.visibility)
 
         mBinding.detailTodaySun.sunrise.text = unixTime(weatherList.daily?.first()?.sunrise).toString()
+        mBinding.detailTodaySun.solarNoon.text = unixTime((weatherList.daily?.first()?.sunset?.let {
+            weatherList.daily.first()?.sunrise?.plus(
+                it
+            )
+        })?.div(2)).toString()
         mBinding.detailTodaySun.sunset.text = unixTime(weatherList.daily?.first()?.sunset).toString()
 
 

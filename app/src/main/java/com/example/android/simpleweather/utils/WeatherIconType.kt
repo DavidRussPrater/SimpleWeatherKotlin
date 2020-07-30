@@ -31,7 +31,7 @@ enum class WeatherIconType {
     }
 
     companion object {
-        fun from(iconID: String? ) = when(iconID){
+        fun from(windIconID: String? ) = when(windIconID){
             "01d" -> CLEAR_SKY
             "02d" -> FEW_CLOUDS
             "03d" -> SCATTER_CLOUDS

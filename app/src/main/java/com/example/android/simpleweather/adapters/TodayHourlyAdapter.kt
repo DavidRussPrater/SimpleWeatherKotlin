@@ -1,14 +1,16 @@
 package com.example.android.simpleweather.adapters
 
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.simpleweather.R
 import com.example.android.simpleweather.databinding.ItemTodayHourlyBinding
 import com.example.android.simpleweather.models.Hourly
 import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.utils.WeatherIconType
-import org.jetbrains.annotations.NotNull
+import com.example.android.simpleweather.utils.WindIconType
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -38,7 +40,8 @@ class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): Recycler
             Log.i("Time", unixTime(hourly.dt).toString())
             mBinding.hourlyTemperature.text = (hourly.temp?.roundToInt()
                 .toString() + "°")
-            mBinding.hourlyWind.text = hourly.windSpeed.toString()
+            mBinding.hourlyWind.text = hourly.windSpeed?.roundToInt().toString()
+            mBinding.hourlyWindIcon.setImageResource(WindIconType.from(hourly.windDeg).windIconID)
             mBinding.hourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weather?.first()?.icon).iconID)
         }
 
