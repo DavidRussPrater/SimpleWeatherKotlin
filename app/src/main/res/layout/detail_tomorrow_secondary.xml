@@ -122,21 +122,6 @@
             app:layout_constraintTop_toBottomOf="@id/tomorrows_uv"
             tools:text="10" />
 
-        <!-- Ozone label -->
-        <TextView
-            android:id="@+id/tomorrows_ozone_label"
-            style="@style/SecondaryDetailLabel"
-            android:text="@string/ozone_label"
-            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_extra_details"
-            app:layout_constraintTop_toBottomOf="@id/tomorrows_visibility_label" />
-
-        <!-- Ozone measurement -->
-        <TextView
-            android:id="@+id/tomorrows_ozone"
-            style="@style/SecondaryDetailMeasurement"
-            app:layout_constraintLeft_toLeftOf="@+id/tomorrows_horizontal_middle"
-            app:layout_constraintTop_toBottomOf="@id/tomorrows_visibility"
-            tools:text="310.54" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

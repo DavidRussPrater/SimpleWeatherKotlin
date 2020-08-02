@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val unitPreference: Boolean? = sharedPref.getBoolean("units_switch", false)
-        Log.i("Preference", unitPreference.toString())
 
         // Initialize the Fused location variable
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -118,7 +117,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            Log.i("Swiped", "User Swiped")
             requestLocationData()
             swipeRefreshLayout.isRefreshing = false
         }
@@ -188,10 +186,7 @@ class MainActivity : AppCompatActivity() {
             val mLastLocation: Location = locationResult.lastLocation
 
             val latitude = mLastLocation.latitude
-            Log.i("Current Latitude", "$latitude")
-
             val longitude = mLastLocation.longitude
-            Log.i("Current Longitude", "$longitude")
             getLocationWeatherDetails(latitude, longitude, context = this@MainActivity)
         }
     }

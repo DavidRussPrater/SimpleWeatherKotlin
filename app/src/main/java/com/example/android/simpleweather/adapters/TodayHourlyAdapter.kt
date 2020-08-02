@@ -37,10 +37,9 @@ class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): Recycler
 
         fun render(hourly: Hourly) {
             mBinding.hourlyTime.text = unixTime(hourly.dt).toString()
-            Log.i("Time", unixTime(hourly.dt).toString())
             mBinding.hourlyTemperature.text = (hourly.temp?.roundToInt()
                 .toString() + "°")
-            mBinding.hourlyWind.text = hourly.windSpeed?.roundToInt().toString()
+            mBinding.hourlyWind.text = (hourly.windSpeed?.roundToInt().toString() + " mph")
             mBinding.hourlyWindIcon.setImageResource(WindIconType.from(hourly.windDeg).windIconID)
             mBinding.hourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weather?.first()?.icon).iconID)
         }

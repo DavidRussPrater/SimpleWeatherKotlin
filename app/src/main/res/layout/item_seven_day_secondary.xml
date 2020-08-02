@@ -8,12 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhiteBackground"
+        android:visibility="gone"
         android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/current_weather_details"
             style="@style/DetailHeader"
-            android:text="@string/current_details_label"
+            android:text="@string/seven_day_details_label"
             app:layout_constraintLeft_toLeftOf="@id/extra_details"
             app:layout_constraintRight_toRightOf="@id/extra_details"
             app:layout_constraintTop_toTopOf="@id/extra_details" />
@@ -106,25 +107,7 @@
             app:layout_constraintTop_toBottomOf="@id/cloud_cover"
             tools:text="20" />
 
-        <!-- Visibility label -->
-        <TextView
-            android:id="@+id/visibility_label"
-            style="@style/SecondaryDetailLabel"
-            android:text="@string/visibility_label"
-            app:layout_constraintLeft_toLeftOf="@+id/extra_details"
-            app:layout_constraintTop_toBottomOf="@id/uv_label" />
-
-        <!-- Visibility measurement -->
-        <TextView
-            android:id="@+id/visibility"
-            style="@style/SecondaryDetailMeasurement"
-            app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
-            app:layout_constraintTop_toBottomOf="@id/uv"
-            tools:text="10" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
-
-

@@ -7,6 +7,7 @@ class Daily (
 
     val clouds: Int?,
 
+    @SerializedName("dew_point")
     val dewPoint: Double?,
 
     val dt: Long,
