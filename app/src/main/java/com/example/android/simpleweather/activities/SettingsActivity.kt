@@ -14,24 +14,19 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.settings_activity)
         supportFragmentManager
             .beginTransaction()
-            .replace(
-                R.id.settings,
-                SettingsFragment()
-            )
+            .replace(R.id.settings, SettingsFragment())
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        fun getUnits(): Boolean{
+        fun getUnits(): Boolean {
             val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
             return sharedPref.getBoolean("units_switch", false)
         }
     }
+}
 
-    class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+class SettingsFragment : PreferenceFragmentCompat() {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        }
     }
-
-
 }

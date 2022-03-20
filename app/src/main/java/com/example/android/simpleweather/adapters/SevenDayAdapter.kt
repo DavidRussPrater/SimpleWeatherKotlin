@@ -1,14 +1,13 @@
 package com.example.android.simpleweather.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.simpleweather.R
+import com.example.android.simpleweather.data.model.DailyDTO
+import com.example.android.simpleweather.data.model.WeatherResponse
 import com.example.android.simpleweather.databinding.ItemSevenDayBinding
-import com.example.android.simpleweather.models.Daily
-import com.example.android.simpleweather.models.WeatherResponse
 import com.example.android.simpleweather.utils.WeatherIconType
 import kotlinx.android.synthetic.main.item_seven_day.view.*
 import java.text.SimpleDateFormat
@@ -23,23 +22,21 @@ class SevenDayAdapter(private val weatherResponse: WeatherResponse): RecyclerVie
         ItemSevenDayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun getItemCount() = weatherResponse.daily?.count() ?: 0
+    override fun getItemCount() = weatherResponse.daily.count()
 
     override fun onBindViewHolder(viewHolder: SevenDayAdapter.ViewHolder, position: Int) {
-        weatherResponse.daily?.get(position)?.let {
+        weatherResponse.daily.get(position).let {
             viewHolder.render(it)
         }
 
         val isExpanded: Boolean = position == mExpandedPosition;
         viewHolder.itemView.seven_day_secondary.visibility =
             if (isExpanded) View.VISIBLE else View.GONE
-        viewHolder.itemView.setActivated(isExpanded)
-        viewHolder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                mExpandedPosition = if (isExpanded) -1 else position
-                notifyItemChanged(position)
-            }
-        })
+        viewHolder.itemView.isActivated = isExpanded
+        viewHolder.itemView.setOnClickListener {
+            mExpandedPosition = if (isExpanded) -1 else position
+            notifyItemChanged(position)
+        }
 
     }
 
@@ -47,20 +44,20 @@ class SevenDayAdapter(private val weatherResponse: WeatherResponse): RecyclerVie
 
         val secondaryDetails: Int = R.id.seven_day_secondary
 
-        fun render(daily: Daily) {
-            mBinding.sevenDayPrimary.dailyDate.text = unixDate(daily.dt).toString()
-            mBinding.sevenDayPrimary.dailyConditionDescription.text = daily.weather?.first()?.description.toString().capitalizeWords()
-            mBinding.sevenDayPrimary.dailyConditionIcon.setImageResource(WeatherIconType.from(daily.weather?.first()?.icon).iconID)
-            mBinding.sevenDayPrimary.dailyTemperatureHigh.text = (daily.temp?.max?.roundToInt()
+        fun render(daily: DailyDTO) {
+            mBinding.sevenDayPrimary.dailyDate.text = unixDate(daily.time)
+            mBinding.sevenDayPrimary.dailyConditionDescription.text = daily.weather.first().description.toString().capitalizeWords()
+            mBinding.sevenDayPrimary.dailyConditionIcon.setImageResource(WeatherIconType.from(daily.weather.first().icon).iconID)
+            mBinding.sevenDayPrimary.dailyTemperatureHigh.text = (daily.temp.max.roundToInt()
                 .toString() + "°")
-            mBinding.sevenDayPrimary.dailyTemperatureLow.text = (daily.temp?.min?.roundToInt()
+            mBinding.sevenDayPrimary.dailyTemperatureLow.text = (daily.temp.min.roundToInt()
                 .toString() + "°")
 
             mBinding.sevenDaySecondary.humidity.text = (daily.humidity.toString() + "%")
             mBinding.sevenDaySecondary.dewPoint.text = daily.dewPoint.toString()
             mBinding.sevenDaySecondary.pressure.text = daily.pressure.toString()
             mBinding.sevenDaySecondary.cloudCover.text = (daily.clouds.toString() + "%")
-            mBinding.sevenDaySecondary.uv.text = daily.uvi?.roundToInt().toString()
+            mBinding.sevenDaySecondary.uv.text = daily.uvi.roundToInt().toString()
 
         }
 
@@ -68,8 +65,8 @@ class SevenDayAdapter(private val weatherResponse: WeatherResponse): RecyclerVie
 
     fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
 
-    private fun unixDate(timex: Long?) : String? {
-        val date = timex?.times(1000L)?.let { Date(it) }
+    private fun unixDate(timex: Int) : String {
+        val date = timex.times(1000L).let { Date(it) }
         val sdf = SimpleDateFormat("EEEE, MMMM d", Locale.US)
         sdf.timeZone = TimeZone.getDefault()
         return sdf.format(date)

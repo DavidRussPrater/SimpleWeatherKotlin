@@ -1,14 +1,12 @@
 package com.example.android.simpleweather.adapters
 
-import android.media.Image
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.simpleweather.R
+import com.example.android.simpleweather.data.model.HourlyDTO
+import com.example.android.simpleweather.data.model.WeatherResponse
 import com.example.android.simpleweather.databinding.ItemTodayHourlyBinding
-import com.example.android.simpleweather.models.Hourly
-import com.example.android.simpleweather.models.WeatherResponse
+import com.example.android.simpleweather.persistence.model.Hourly
 import com.example.android.simpleweather.utils.WeatherIconType
 import com.example.android.simpleweather.utils.WindIconType
 import java.text.SimpleDateFormat
@@ -16,7 +14,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
-class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): RecyclerView.Adapter<TodayHourlyAdapter.ViewHolder>()  {
+class TodayHourlyAdapter(private val hourly: List<Hourly>): RecyclerView.Adapter<TodayHourlyAdapter.ViewHolder>()  {
 
 
 
@@ -24,11 +22,11 @@ class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): Recycler
         ItemTodayHourlyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun getItemCount() = weatherResponse.hourly?.count() ?: 0
+    override fun getItemCount() = hourly.count()
 
 
     override fun onBindViewHolder(viewHolder: TodayHourlyAdapter.ViewHolder, position: Int) {
-        weatherResponse.hourly?.get(position)?.let {
+        hourly[position].let {
             viewHolder.render(it)
         }
     }
@@ -36,21 +34,13 @@ class TodayHourlyAdapter(private val weatherResponse: WeatherResponse): Recycler
     inner class ViewHolder(private val mBinding: ItemTodayHourlyBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
         fun render(hourly: Hourly) {
-            mBinding.hourlyTime.text = unixTime(hourly.dt).toString()
-            mBinding.hourlyTemperature.text = (hourly.temp?.roundToInt()
+            mBinding.hourlyTime.text = hourly.time
+            mBinding.hourlyTemperature.text = (hourly.temp
                 .toString() + "°")
-            mBinding.hourlyWind.text = (hourly.windSpeed?.roundToInt().toString() + " mph")
+            mBinding.hourlyWind.text = (hourly.windSpeed.roundToInt().toString() + " mph")
             mBinding.hourlyWindIcon.setImageResource(WindIconType.from(hourly.windDeg).windIconID)
-            mBinding.hourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weather?.first()?.icon).iconID)
+            mBinding.hourlyConditionIcon.setImageResource(WeatherIconType.from(hourly.weatherIcon).iconID)
         }
 
     }
-
-    private fun unixTime(timex: Long) : String? {
-        val date = Date(timex.times(1000L))
-        val sdf = SimpleDateFormat("h a", Locale.US)
-        sdf.timeZone = TimeZone.getDefault()
-        return sdf.format(date)
-    }
-
 }

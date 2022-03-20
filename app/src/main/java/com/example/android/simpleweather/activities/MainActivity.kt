@@ -14,10 +14,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -25,12 +25,14 @@ import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.android.simpleweather.R
-import com.example.android.simpleweather.models.WeatherResponse
-import com.example.android.simpleweather.network.WeatherService
+import com.example.android.simpleweather.data.model.WeatherResponse
+import com.example.android.simpleweather.persistence.model.Current
+import com.example.android.simpleweather.persistence.model.CurrentAndToday
 import com.example.android.simpleweather.ui.main.SectionsPagerAdapter
-import com.example.android.simpleweather.ui.main.SevenDayForecastFragment
-import com.example.android.simpleweather.ui.main.TodaysForecastFragment
-import com.example.android.simpleweather.ui.main.TomorrowsForecastFragment
+import com.example.android.simpleweather.ui.main.sevenday.SevenDayForecastFragment
+import com.example.android.simpleweather.ui.main.today.TodayViewModel
+import com.example.android.simpleweather.ui.main.today.TodaysForecastFragment
+import com.example.android.simpleweather.ui.main.tomorrow.TomorrowsForecastFragment
 import com.example.android.simpleweather.utils.Constants
 import com.google.android.gms.location.*
 import com.google.android.material.tabs.TabLayout
@@ -39,13 +41,17 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import retrofit.*
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 
 // OpenWeather Link : https://openweathermap.org/api
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel by viewModels<TodayViewModel>()
 
     // A fused location client variable which is further used to get the user's current location
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
@@ -67,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val unitPreference: Boolean? = sharedPref.getBoolean("units_switch", false)
+        sharedPref.getBoolean("units_switch", false)
 
         // Initialize the Fused location variable
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -121,6 +127,14 @@ class MainActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = false
         }
 
+        viewModel.insertCurrent(37.6439, -98.7376)
+        Thread.sleep(3000)
+
+        viewModel.currentWeather.observe(this, { weather ->
+            Timber.i("Here here")
+            renderUI(weather)
+        })
+
     }
 
     /**
@@ -161,7 +175,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     /**
      * A function to request the current location. Using the fused location provider client.
      */
@@ -187,82 +200,28 @@ class MainActivity : AppCompatActivity() {
 
             val latitude = mLastLocation.latitude
             val longitude = mLastLocation.longitude
-            getLocationWeatherDetails(latitude, longitude, context = this@MainActivity)
+            getLocationWeatherDetails(latitude, longitude)
         }
     }
 
 
-    private fun getLocationWeatherDetails(latitude: Double, longitude: Double, context: Context){
-        val unitConstant: String
-        val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val unitPreference: Boolean = sharedPref.getBoolean("units_switch", false)
+    private fun getLocationWeatherDetails(latitude: Double, longitude: Double) {
 
-        if (unitPreference) {
-            unitConstant = Constants.METRIC_UNIT
-        } else {
-            unitConstant = Constants.IMPERIAL_UNIT
-        }
-
-        if(Constants.isNetworkAvailable(this)) {
-
-            val retrofit : Retrofit = Retrofit.Builder().
-            baseUrl(Constants.BASE_URL).
-            addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val service: WeatherService = retrofit
-                .create<WeatherService>(WeatherService::class.java)
-
-            val listCall: Call<WeatherResponse> = service.getWeather(
-                latitude, longitude,
-                unitConstant,
-                Constants.EXCLUDE_MINUTELY,
-                Constants.APP_ID
-            )
-
+        if (Constants.isNetworkAvailable(this)) {
             showCustomProgressDialog()
-
-            listCall.enqueue(object : Callback<WeatherResponse>{
-                override fun onFailure(t: Throwable) {
-                    Log.e("Response Error", t.message.toString())
-                    hideProgressDialog()
-                }
-
-                @RequiresApi(Build.VERSION_CODES.N)
-                override fun onResponse(response: Response<WeatherResponse>?, retrofit: Retrofit?) {
-                    if(response!!.isSuccess) {
-                        hideProgressDialog()
-                        val weatherList: WeatherResponse = response.body()
-                        setupUI(weatherList)
-                        Log.i("Response Result", "$weatherList")
-                    } else {
-
-                        val rc = response.code()
-                        when(rc){
-                            400 -> {
-                                Log.e("Error 400", "Bad Connection")
-                            }
-                            404 -> {
-                                Log.e("Error 404", "Not Found")
-                            } else -> {
-                            Log.e("Error", "Generic Error")
-                        }
-
-                        }
-                    }
-                }
-
-            })
+            viewModel.insertCurrent(latitude, longitude)
 
         } else {
-            Toast.makeText(this@MainActivity,
+            Toast.makeText(
+                this@MainActivity,
                 "No Internet Connection Available.",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
     }
 
-    private fun showCustomProgressDialog(){
+    private fun showCustomProgressDialog() {
         mProgressDialog = Dialog(this)
         /* Set the screen content from the layout resource folder
         * The resource will be inflated, adding all top-level view to the screen
@@ -274,7 +233,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideProgressDialog() {
-        if(mProgressDialog != null) {
+        if (mProgressDialog != null) {
             mProgressDialog!!.dismiss()
         }
     }
@@ -290,7 +249,7 @@ class MainActivity : AppCompatActivity() {
                 requestLocationData()
                 true
             }
-            R.id.action_settings ->  {
+            R.id.action_settings -> {
                 val settingsIntent = Intent(
                     this,
                     SettingsActivity::class.java
@@ -302,28 +261,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getUnitPreference(unitPreference: Boolean): Boolean{
-        return true
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    @SuppressLint("SetTextI18n")
-    private fun setupUI(weatherList: WeatherResponse){
+    private fun renderUI(current: CurrentAndToday) {
 
         supportFragmentManager.fragments.forEach {
             when (it) {
                 is TodaysForecastFragment -> {
-                    it.render(weatherList)
+                    it.render(current)
                 }
-                is TomorrowsForecastFragment -> {
-                    it.render(weatherList)
-                }
-                is SevenDayForecastFragment -> {
-                    it.render(weatherList)
-                }
+//                is TomorrowsForecastFragment -> {
+//                    it.render(weatherList)
+//                }
+//                is SevenDayForecastFragment -> {
+//                    it.render(weatherList)
+//                }
             }
         }
-
     }
-
 }

@@ -10,7 +10,7 @@ import com.example.android.simpleweather.BuildConfig
 object Constants {
 
     const val APP_ID: String = "803c7f2de098a5ee7b414419d784b598"
-    const val BASE_URL: String = "http://api.openweathermap.org/data/"
+    const val BASE_URL: String = "https://api.openweathermap.org/data/"
     const val METRIC_UNIT: String = "metric"
     const val IMPERIAL_UNIT: String = "imperial"
     const val EXCLUDE_MINUTELY: String = "minutely"

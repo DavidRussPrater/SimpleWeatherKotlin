@@ -1,12 +1,12 @@
-package com.example.android.simpleweather.ui.main
+package com.example.android.simpleweather.ui.main.sevenday
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.android.simpleweather.adapters.SevenDayAdapter
+import com.example.android.simpleweather.data.model.WeatherResponse
 import com.example.android.simpleweather.databinding.FragmentSevenDayForecastBinding
-import com.example.android.simpleweather.models.WeatherResponse
 
 /**
  * A simple [Fragment] subclass.

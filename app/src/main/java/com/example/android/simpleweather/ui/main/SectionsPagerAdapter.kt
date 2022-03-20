@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.android.simpleweather.R
+import com.example.android.simpleweather.ui.main.sevenday.SevenDayForecastFragment
+import com.example.android.simpleweather.ui.main.today.TodaysForecastFragment
+import com.example.android.simpleweather.ui.main.tomorrow.TomorrowsForecastFragment
 
 private val TAB_TITLES = arrayOf(
         R.string.tab_text_today,
